@@ -1,0 +1,28 @@
+program EXAMPLE (INPUT, OUTPUT);
+const
+	nl = '\n';
+	n2 = ' x > y > z';
+	
+var
+X, Y, Z, W: Integer;
+
+
+
+	
+begin
+	
+	x := 10;
+	y := 7;
+	z := 5;
+	
+	if( x > y ) and ( y > z) then
+		WRITECHAR(n2)
+	
+	if( x > y ) then
+	begin
+		
+		if (y > z) then
+			WRITECHAR(n2)
+	end	
+ 	
+end.

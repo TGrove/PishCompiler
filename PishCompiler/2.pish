@@ -1,0 +1,66 @@
+program EXAMPLE (INPUT, OUTPUT);
+const
+	
+type
+	STRING = array [1..STRINGSIZE] of CHAR;
+	STUDENT = record
+		NAME : STRING;
+		GPA : REAL;
+		STRINGSTRNIG : array [1..STRINGSIZE] of CHAR;
+	end;
+
+var
+X, Y, Z, W: Integer;
+XX, YY, ZZ: REAL;
+I : INTEGER;
+II: Real;
+MOH_ARRAY : array [0..10] of INTEGER;
+
+function COUNTDOWN (L: INTEGER): INTEGER; FORWARD;
+
+
+function COUNTDOWN;
+	var 
+	G: Integer;
+	
+	begin
+		WRITEINT(L);
+		G := 1;
+		
+		G := L - G ;
+		
+		if ( G < 0) then
+			COUNTDOWN :=0
+		else
+			COUNTDOWN := COUNTDOWN(G)
+	end;
+	
+begin
+	
+	MOH_ARRAY[0] := 1;
+	MOH_ARRAY[1] := 2;
+	MOH_ARRAY[2] := 3;
+	MOH_ARRAY[3] := 4;
+	MOH_ARRAY[4] := 5;
+	MOH_ARRAY[5] := 6;
+	MOH_ARRAY[6] := 7;
+	MOH_ARRAY[7] := 8;
+	MOH_ARRAY[8] := 9;
+	MOH_ARRAY[9] := 10;
+	MOH_ARRAY[10] := 11;
+	
+	MOH_ARRAY[10] := MOH_ARRAY[1] * 2;
+	
+    WRITEINT( MOH_ARRAY[0] );
+    WRITEINT( MOH_ARRAY[1] );
+ 	WRITEINT( MOH_ARRAY[2] );
+ 	WRITEINT( MOH_ARRAY[3] );
+ 	WRITEINT( MOH_ARRAY[4] );
+ 	WRITEINT( MOH_ARRAY[5] );
+ 	WRITEINT( MOH_ARRAY[6] );
+ 	WRITEINT( MOH_ARRAY[7] );
+ 	WRITEINT( MOH_ARRAY[8] );
+ 	WRITEINT( MOH_ARRAY[9] );
+ 	WRITEINT( MOH_ARRAY[10] )
+ 	
+end.

@@ -1,0 +1,46 @@
+program EXAMPLE (INPUT, OUTPUT);
+const
+	STRINGSIZE = 10;
+	
+type
+	STRING = array [1..STRINGSIZE] of CHAR;
+	STUDENT = record
+		NAME : STRING;
+		GPA : REAL;
+		ADDRESS : array [1..STRINGSIZE] of CHAR;
+		TOM,MOHAMAD : record
+			this : INTEGER;
+			THAT : REAL;
+		END; 
+	end;
+	CLASS = record
+		NAME : STRING;
+		NUMBER : INTEGER;
+		LIST_OF_STUDENT : array [1..STRINGSIZESSSSSSSSSS] of STUDENT;
+	end;
+
+var X, Y: INTEGER;
+MOE : STUDENT;
+
+procedure SWAP (A, B: INTEGER);
+	var TMP: INTEGER;
+	TEMP : REAL;
+	begin
+		TMP := A;
+		A := B;
+		B := TMP;
+		B := TEMP
+	end;	
+
+function GCD (A, B :INTEGER): INTEGER;
+	begin
+		MOE.MOHAMAD.TOM := 1;
+		
+		if B = 1.0 then GCD := A
+		else GCD := GCD (B, A mod B)
+	end;
+
+begin
+	if Y > X then SWAP (X, Y);
+	WRITEINT (GCD (X,Y))
+end.

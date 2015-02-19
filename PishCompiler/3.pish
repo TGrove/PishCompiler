@@ -1,0 +1,165 @@
+program EXAMPLE (INPUT, OUTPUT);
+const
+	p0 = '\n';
+	p1 = '';
+	p2 = 'x > y';
+	p4 = 'helllloo ';
+	
+	print1 = ', answer is: ';
+	print2 = ' MUL ';
+	print3 = ' ADD ';
+	a = 5;
+	bbb = 6;
+	c = 10;
+	d = 20;
+	
+	aa = 5.5;
+	bb = 7.7;
+	cc = 8.8;
+	
+type
+	STRING = array [0.. 6] of CHAR;
+	STUDENT = record
+		NAME : STRING;
+		GPA : INTEGER;
+		GRADE : array [0..5] of integer;
+	end;
+
+var
+
+X, Y, Z, W: Integer;
+XX, YY, ZZ: REAL;
+
+I : INTEGER;
+V : INTEGER;
+sum: INTEGER;
+jj, ee: integer;
+
+II: Real;
+TOM_ARRAY : array [0..10] of REAL;
+MOH_ARRAY : array [0..10] of INTEGER;
+MOH_STUDENT : STUDENT;
+
+function COUNTDOWN (L: INTEGER): INTEGER; FORWARD;
+function COUNTUP (L: INTEGER): INTEGER; FORWARD;
+
+
+function COUNTDOWN;
+	var 
+	G: Integer;
+	
+	begin
+		WRITEINT(L);
+		G := 1;
+		
+		G := L - G ;
+		
+		if ( G <= 0) then
+			COUNTDOWN :=0
+		else
+			COUNTDOWN := COUNTDOWN(G)
+	end;
+
+function COUNTUP;
+	var 
+	U: Integer;
+	
+	begin
+		WRITEINT(L);
+		U := 1;
+		
+		U := L + U ;
+		
+		if ( U >= 10) then
+			COUNTUP := 10
+		else
+			COUNTUP := COUNTUP(U)
+	end;
+	
+
+begin
+	x := 10;
+	y := 5;
+	
+	XX := AA;
+	
+	I := 0;
+	v := 0;
+	JJ := 0;
+	
+	sum := 0;
+	
+	wHiLe I < 10 do
+    begin
+    	v := 0;
+    	wHiLe v < 10 do
+    	begin
+    		sum := sum + (V + 1);
+    		V := V + 1
+    	end;
+    		
+		I := I + 1
+    end;
+    
+	WRITEINT(sum);
+	
+	sum := 0;
+	
+	for JJ := 1 to 10 do
+	begin
+	
+		for ee := 1 to 10 do
+		begin
+		
+			sum := sum + 1
+		end
+		
+	end;
+	
+	WRITEINT(sum);
+	
+	TOM_ARRAY[0] := 0.0;
+	TOM_ARRAY[1] := 1.0;
+	TOM_ARRAY[2] := 2.0;
+	TOM_ARRAY[3] := 3.0;
+	TOM_ARRAY[4] := 4.0;
+	TOM_ARRAY[5] := 5.0;
+	TOM_ARRAY[6] := 6.0;
+	TOM_ARRAY[7] := 7.0;
+	TOM_ARRAY[8] := 8.0;
+	TOM_ARRAY[9] := 9.0;
+	TOM_ARRAY[10] := 10.0;
+	TOM_ARRAY[10] := TOM_ARRAY[2] * 40.0;
+	
+	MOH_ARRAY[2] := 2 ;
+	MOH_ARRAY[10] := 10;
+	
+	MOH_ARRAY[10] := MOH_ARRAY[2] * 40;
+	WRITEINT( MOH_ARRAY[10] );
+	
+	WRITEREAL( TOM_ARRAY[0] );
+	WRITEREAL( TOM_ARRAY[1] );
+	WRITEREAL( TOM_ARRAY[2] );
+	WRITEREAL( TOM_ARRAY[3] );
+	WRITEREAL( TOM_ARRAY[4] );
+	WRITEREAL( TOM_ARRAY[5] );
+	WRITEREAL( TOM_ARRAY[6] );
+	WRITEREAL( TOM_ARRAY[7] );
+	WRITEREAL( TOM_ARRAY[8] );
+	WRITEREAL( TOM_ARRAY[9] );
+	WRITEREAL( TOM_ARRAY[10] );
+	
+	
+	WRITEREAL( XX );
+ 	WRITEREAL( AA );
+ 	
+ 	Z := COUNTDOWN(10);
+ 	WRITECHAR(p0);
+ 	WRITECHAR(p4);
+ 	
+ 	WRITEINT(1337);
+ 	Z := COUNTUP(0)
+ 	
+ 	
+ 	
+end.

@@ -1,0 +1,93 @@
+
+Depth(0) Program[
+	HashTable [
+		 D = Symbol[d] Type[IntegerExpr] depth[0] offset[260] size[4] at line 14
+		 YY = Symbol[YY] Type[RealType] depth[0] offset[380] size[4] at line 31
+		 PRINT2 = Symbol[print2] Type[StringExpr] depth[0] offset[192] size[28] at line 9
+		 PRINT1 = Symbol[print1] Type[StringExpr] depth[0] offset[132] size[60] at line 8
+		 A = Symbol[a] Type[IntegerExpr] depth[0] offset[248] size[4] at line 11
+		 JJ = Symbol[jj] Type[IntType] depth[0] offset[400] size[4] at line 36
+		 PRINT3 = Symbol[print3] Type[StringExpr] depth[0] offset[220] size[28] at line 10
+		 C = Symbol[c] Type[IntegerExpr] depth[0] offset[256] size[4] at line 13
+		 WRITECHAR = Symbol[WRITECHAR] Type[NULL] depth[0] offset[36] size[0] at line 0
+		 CHARTYPE = Symbol[CharType] Type[CHAR] depth[0] offset[20] size[4] at line 0
+		 I = Symbol[I] Type[IntType] depth[0] offset[388] size[4] at line 33
+		 STRINGEXPR = Symbol[StringExpr] Type[STRING] depth[0] offset[36] size[0] at line 0
+		 COUNTDOWN = Symbol[COUNTDOWN] Type[IntType] depth[0] offset[556] size[4] at line 43
+		 COUNTUP = Symbol[COUNTUP] Type[IntType] depth[0] offset[560] size[4] at line 44
+		 W = Symbol[W] Type[IntType] depth[0] offset[372] size[4] at line 30
+		 V = Symbol[V] Type[IntType] depth[0] offset[392] size[4] at line 34
+		 BBB = Symbol[bbb] Type[IntegerExpr] depth[0] offset[252] size[4] at line 12
+		 STUDENT = Symbol[STUDENT] Type[RecordType] depth[0] offset[304] size[56] at line 22
+		 BB = Symbol[bb] Type[RealExpr] depth[0] offset[268] size[4] at line 17
+		 REALEXPR = Symbol[RealExpr] Type[REAL] depth[0] offset[28] size[4] at line 0
+		 SUM = Symbol[sum] Type[IntType] depth[0] offset[396] size[4] at line 35
+		 TRUE = Symbol[TRUE] Type[IntegerExpr] depth[0] offset[4] size[4] at line 0
+		 REALTYPE = Symbol[RealType] Type[REAL] depth[0] offset[16] size[4] at line 0
+		 Y = Symbol[Y] Type[IntType] depth[0] offset[364] size[4] at line 30
+		 X = Symbol[X] Type[IntType] depth[0] offset[360] size[4] at line 30
+		 Z = Symbol[Z] Type[IntType] depth[0] offset[368] size[4] at line 30
+		 II = Symbol[II] Type[RealType] depth[0] offset[408] size[4] at line 38
+		 ZZ = Symbol[ZZ] Type[RealType] depth[0] offset[384] size[4] at line 31
+		 RECORDTYPE = Symbol[RecordType] Type[RECORD] depth[0] offset[36] size[0] at line 0
+		 XX = Symbol[XX] Type[RealType] depth[0] offset[376] size[4] at line 31
+		 P4 = Symbol[p4] Type[StringExpr] depth[0] offset[88] size[44] at line 6
+		 MOH_STUDENT = Symbol[MOH_STUDENT] Type[STUDENT] depth[0] offset[500] size[56] at line 41
+		 STRINGTYPE = Symbol[StringType] Type[STRING] depth[0] offset[36] size[0] at line 0
+		 P1 = Symbol[p1] Type[StringExpr] depth[0] offset[52] size[8] at line 4
+		 P0 = Symbol[p0] Type[StringExpr] depth[0] offset[36] size[16] at line 3
+		 MOH_ARRAY = Symbol[MOH_ARRAY] Type[ArrayType] depth[0] offset[456] size[44] at line 40
+		 CHAREXPR = Symbol[CharExpr] Type[CHAR] depth[0] offset[32] size[4] at line 0
+		 P2 = Symbol[p2] Type[StringExpr] depth[0] offset[60] size[28] at line 5
+		 AA = Symbol[aa] Type[RealExpr] depth[0] offset[264] size[4] at line 16
+		 WRITEINT = Symbol[WRITEINT] Type[NULL] depth[0] offset[36] size[0] at line 0
+		 INTEGEREXPR = Symbol[IntegerExpr] Type[INT] depth[0] offset[24] size[4] at line 0
+		 CC = Symbol[cc] Type[RealExpr] depth[0] offset[272] size[4] at line 18
+		 INTTYPE = Symbol[IntType] Type[INT] depth[0] offset[12] size[4] at line 0
+		 FALSE = Symbol[FALSE] Type[IntegerExpr] depth[0] offset[8] size[4] at line 0
+		 EE = Symbol[ee] Type[IntType] depth[0] offset[404] size[4] at line 36
+		 WRITEREAL = Symbol[WRITEREAL] Type[NULL] depth[0] offset[36] size[0] at line 0
+		 STRING = Symbol[STRING] Type[ArrayType] depth[0] offset[276] size[28] at line 21
+		 TOM_ARRAY = Symbol[TOM_ARRAY] Type[ArrayType] depth[0] offset[412] size[44] at line 39
+	]
+	RecordMap [
+	 STUDENT = 
+	Depth(1) STUDENT[
+		HashTable [
+			 NAME = Symbol[NAME] Type[STRING] depth[1] offset[0] size[28] at line 23
+			 GRADE = Symbol[GRADE] Type[ArrayType] depth[1] offset[32] size[24] at line 25
+			 GPA = Symbol[GPA] Type[IntType] depth[1] offset[28] size[4] at line 24
+		]
+		RecordMap [
+		]
+	] End Depth(1)
+	]
+	Children [
+ 
+	Depth(1) COUNTDOWN[
+		HashTable [
+			 G = Symbol[G] Type[IntType] depth[1] offset[8] size[4] at line 49
+			 L = Symbol[L] Type[IntType] depth[1] offset[4] size[4] at line 43
+		]
+		RecordMap [
+		]
+	] End Depth(1)
+
+	Depth(1) COUNTUP[
+		HashTable [
+			 U = Symbol[U] Type[IntType] depth[1] offset[8] size[4] at line 65
+			 L = Symbol[L] Type[IntType] depth[1] offset[4] size[4] at line 44
+		]
+		RecordMap [
+		]
+	] End Depth(1)
+
+	Depth(1) MAIN[
+		HashTable [
+		]
+		RecordMap [
+		]
+	] End Depth(1)
+	] End Children
+] End Depth(0)
+

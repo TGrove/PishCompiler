@@ -1,0 +1,70 @@
+program EXAMPLE (INPUT, OUTPUT);
+
+const
+	MAX = 100;
+	ORMIN = -MAX;
+	ANDSPEEDOFLIGHT = 2.998E+6;
+	WHILENAME = 'Alice'
+	
+var X, Y: INTEGER;
+
+function GCD (A, B: INTEGER): INTEGER;
+	begin
+		if B = 0 then GCD := A
+		else GCD := GCD (B, A mod B)
+	end;
+	
+function GCD2 (A, B: INTEGER): INTEGER;
+	var X1, Y1:  ;
+	begin
+
+		begin
+			if B = 0 then 
+				GCD := A
+			else 
+				GCD := GCD (B, A mod B);
+				
+			procedure GCD3 (A2, B2: INTEGER);
+			begin
+				if B2 = 0 Then 
+					begin 
+						GCD2 :=A2;
+						TESTING :=213;
+						
+						if B = 0 then 
+							GCD := A
+						else 
+							GCD := GCD (B, A mod B);
+							
+							e:=23;
+							
+						helo := 123
+							
+						
+					end	
+				else 
+					begin
+						GCD2 := GCD2 (B2, A2 MOD B2 );
+						TEST := 1234
+					end;
+				
+				procedure GCD4 (A3, B3: INTEGER);
+				begin
+					if B3 = 0 THEn GCD3 :=A3
+					else GCD3 := GCD2 (B3, A3 MOD B3 )
+				end;
+				
+				B := TMP					
+			end		
+		end;
+		
+		TEST := TEST
+	end;
+
+
+begin
+	READ (X, Y);
+	if Y > X then SWAP (X, Y);
+	WRITE (GCD (X,Y))
+	
+end

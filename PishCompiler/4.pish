@@ -1,0 +1,70 @@
+program EXAMPLE (INPUT, OUTPUT);
+const
+	print0 = '\n';
+	print1 = ', answer is: ';
+	print2 = ' MUL ';
+	print3 = ' ADD ';
+	a = 5;
+	bbb = 6;
+	c = 10;
+	d = 20;
+	
+	aa = 5.5;
+	bb = 7.7;
+	cc = 8.8;
+	
+type
+	STRING = array [0.. 6] of CHAR;
+	STUDENT = record
+		NAME : STRING;
+		GPA : INTEGER;
+		GRADE : array [0..5] of integer;
+	end;
+
+var
+
+X, Y, Z, W: Integer;
+XX, YY, ZZ: REAL;
+I : INTEGER;
+II: Real;
+MOH_ARRAY : array [0..10] of INTEGER;
+MOH_STUDENT : STUDENT;
+ARRAY_STUDENT : array [0 .. 2] of student;
+
+
+function COUNTDOWN (L: INTEGER): INTEGER; FORWARD;
+
+
+function COUNTDOWN;
+	var 
+	G: Integer;
+	
+	begin
+		WRITEINT(L);
+		G := 1;
+		
+		G := L - G ;
+		
+		if ( G < 0) then
+			COUNTDOWN :=0
+		else
+			COUNTDOWN := COUNTDOWN(G)
+	end;
+	
+begin
+	MOH_STUDENT.GPA := 22;
+	X := MOH_STUDENT.GPA;
+	Z := a;
+	MOH_STUDENT.GRADE[0] := 77;
+	W := MOH_STUDENT.GRADE[0];
+	WRITEINT( w);
+
+	ARRAY_STUDENT[0].GPA := 33;
+	W := ARRAY_STUDENT[0].GPA ;
+	WRITEINT ( W );
+	
+	WRITEINT( Z );
+	WRITEINT( a);
+ 	WRITEINT( x )
+ 	
+end.

@@ -1,0 +1,28 @@
+program EXAMPLE (INPUT, OUTPUT);
+
+var X, Y: INTEGER;
+
+procedure SWAP (A, B: INTEGER);
+	var TMP: INTEGER;
+	begin
+		TMP := A;
+		A := B;
+		B := TMP
+	
+	end;	
+
+function GCD (A, B: INTEGER ): INTEGER;
+	VAR a , b : REAL;
+	X, Y : INTEGER;
+	begin
+		if B = 0 then GCD := A
+		else GCD := GCD (B, A mod B)
+	end;
+
+BEGIN
+	READ (X, Y);
+	if Y > X then SWAP (X, Y);
+	WRITE (GCD (X,Y))
+end.
+
+

@@ -1,0 +1,98 @@
+program EXAMPLE (INPUT, OUTPUT);
+const
+	MAX = 100;
+	ORMIN = -MAX;
+	ANDSPEEDOFLIGHT = 2.998E+6;
+	WHILENAME = 'Alice';
+	STRINGSIZE = 23;
+	{
+	sd
+	
+	fjksdfsdf
+	
+	}
+	(*
+	 askjcasd
+	 *)
+type
+	STRING = array [1..STRINGSIZE] of CHAR;
+	STUDENT = record
+		NAME : STRING;
+		GPA : REAL;
+		STRINGSTRNIG : array [1..STRINGSIZE] of CHAR;
+	end;
+	CLASS = record
+		NAME : STRING;
+		ID : STRING;
+		LIST_OF_STUDENT : array [1..STRINGSIZE] of STUDENT;
+		MOHAMAD : record
+			this : INTEGER;
+			THAT : REAL;
+		END; 
+	end;
+
+
+var X, Y: REAL;
+D,C , F: REAL;
+G, H: C;
+J, I: D;
+Tom: student;
+
+function GCD (A, B: REAL): REAL; FORWARD;
+  
+procedure SWAP (A, B: REAL);
+	var TMP: REAL;
+	Z, X, C: REAL;
+	begin
+		TMP := A;
+		A := B;
+		B := TMP 
+	end;
+	
+function GCD;
+	var TEST: INTEGER;
+	TMP : REAL;
+	begin
+		begin
+			if B = 0.0 then 
+				GCD := A
+			else 
+				GCD := GCD (B, A mod B);
+				
+			procedure GCD2 (A2, B2: INTEGER);
+			begin
+				if B2 = 0 Then 
+					begin 
+						if B = 0.0 then 
+							GCD := A
+						else 
+							GCD := GCD (B, A mod B);
+							
+						B2 := 123
+							
+						
+					end	
+				else 
+					begin
+					    GCD2 (B2, A2 MOD B2 );
+						TEST := 1234
+					end;
+				
+				procedure GCD3 (A3, B3: INTEGER);
+				begin
+					if TRUE THEn B3 :=A3
+					else GCD2 (B3, A3 MOD B3 )
+				end;
+				
+				B := TMP					
+			end		
+		end;
+		
+		TEST := TEST
+	end;
+
+begin
+	if Y > X then 
+		SWAP (X, Y);
+	J := Swap (x, y)
+end.

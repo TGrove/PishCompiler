@@ -1,0 +1,403 @@
+ 
+package pish; 
+ 
+import java_cup.runtime.*;
+import pish.ast.*;
+
+parser code  {:
+   
+  public void report_error(String message, Object info) {
+    StringBuffer m = new StringBuffer("Error ");
+
+    if (info instanceof java_cup.runtime.Symbol) 
+      m.append( "("+info.toString()+")" );
+     
+    m.append(" : "+message); 
+   
+    System.out.println(m);
+  }
+
+  public void syntax_error(Symbol s){
+  	JavaSymbol tok = null;
+  	
+  	if( s instanceof JavaSymbol ){
+		tok = (JavaSymbol) s;
+	}else{
+		tok = (JavaSymbol) s.value;
+	}
+	
+	System.out.println("Line " + tok.getLine()+": Syntax Error; Unexpected: \"" + tok.toString()+"\"" );
+  }
+	
+  public void report_fatal_error(String message, Object info) {
+  	System.out.println("Fatal Error");
+    report_error(message, info);
+    throw new RuntimeException("Fatal Syntax Error");
+  }
+:};
+
+action code
+{:
+
+:}
+
+terminal	JavaSymbol	OR,EQUAL,VAR,DOWNTO,END,THEN,WHILE,TO,ELSE,PROCEDURE,PROGRAM,OF,IF,BEGIN,TYPE;
+terminal	JavaSymbol	RECORD,NOT,SEMICOLON,FOR,FORWARD,ARRAY,CONST,FUNCTION,DO;
+terminal 	JavaSymbol	ASSIGN,COMMA,COLON,PLUS,MINUS;
+terminal	JavaSymbol	DOT,LPAREN,RPAREN,LSPAREN,RSPAREN,CHAR,INTEGER;
+terminal	JavaSymbol	REAL;
+terminal	JavaSymbol	ID,RELOP,MULOP;
+terminal	JavaSymbol	STRING_LITERAL;
+terminal	JavaSymbol	INT;
+terminal	JavaSymbol	DECIMAL;
+
+non terminal	Program						program;
+non terminal	VariableList				identifier_list;
+non terminal	ConstantList				constants;
+non terminal	ConstantList				constant;
+non terminal	Expr						constantprime;
+non terminal	TypeDefList					types;
+non terminal	TypeDefList					type_def;
+non terminal	SimpleDeclerationList		declarations;
+non terminal	SimpleDeclerationList		declaration_list;
+non terminal	Variable					type;
+non terminal 	Variable					standard_type_with_id;
+non terminal	Type						standard_type;
+non terminal	SubProgramDeclerationList	subprogram_declarations;
+non terminal	SubProgramDecleration		subprogram_declaration;
+non terminal	SimpleDeclerationList		arguments;
+non terminal	SimpleDeclerationList		parameter_list;
+non terminal	SubProgramHeader 			subprogram_head;
+non terminal	CompoundStmt				compound_statement;
+non terminal	StmtList					optional_statements;
+non terminal	Stmt						statement;
+non terminal	StmtList					statement_list;
+non terminal	NumberExpr					num;
+non terminal	Boolean 					forprime;
+non terminal	Variable					variable;
+non terminal	Expr 						expression;
+non terminal	Stmt						procedure_statement;
+non terminal	ExprList					expression_list;
+non terminal	Expr						simple_expression;
+non terminal	Expr						term;
+non terminal	Operator					sign;
+non terminal	Expr	 					factor;
+non terminal	ArrayType 					array;
+non terminal	Variable 					numeralid;	
+non terminal	Variable 					variableprime;	
+
+precedence left ELSE; 
+precedence left SEMICOLON;
+precedence left DOT;
+
+/***** GRAMATICAL RULES *****/
+start with program;
+
+
+/***** PROGRAM *****/
+program ::=
+  /**** EXPECTED ****/
+    PROGRAM ID:id LPAREN identifier_list RPAREN SEMICOLON
+    constants:c
+    types:t
+    declarations:d
+    subprogram_declarations:p
+    compound_statement:s
+    DOT
+    {:	RESULT = new Program(new IDNode(id),c,t,d,p,s); :}
+    
+  /**** COMMON ERROR(s) *****/
+    /** MISSING: DOT at end of program **/
+    | PROGRAM ID:id LPAREN identifier_list RPAREN SEMICOLON
+    constants:c
+    types:t
+    declarations:d
+    subprogram_declarations:p
+    compound_statement:s
+    {: System.out.println("ERROR RECOVERED Expected \".\" to terminate program at end of program");
+       RESULT = new Program(new IDNode(id),c,t,d,p,s); :}
+       
+  /** UNKNOWN **/    
+    | error
+    ;
+
+/***** IDENTIFIER_LIST *****/
+identifier_list ::=
+  /**** EXPECTED ****/
+    ID:i
+      {: RESULT = new VariableList(new IDNode(i)); :}
+    
+    | identifier_list:l COMMA ID:i
+      {: RESULT = new VariableList(new IDNode(i),l); :}
+  
+    /** UNKNOWN **/
+    | error
+      {: RESULT = new VariableList(new IDNode("ERROR_PLACE_HOLDER"),null); :}
+    ;
+
+
+/***** CONSTANTS *****/
+  /** CONST variable **/
+constants ::=
+	CONST constant:c
+	{: RESULT = c; :}
+	|  /*epsilon*/ ; 
+
+
+  /** Variable = value **/
+constant ::=
+  /**** EXPECTED ****/
+	constant:c ID:id EQUAL constantprime:expr SEMICOLON 
+	{: RESULT = new ConstantList(new Constant(new ConstantId(id),expr),c); :}
+
+  /**** COMMON ERROR(s) ****/
+    /** MISSING: Semi Colon **/
+	| constant:c ID:id EQUAL constantprime:expr /*semi*/
+	{: System.out.println("ERROR RECOVERED at Line " + expr.getLineNumber() + ": Expected \";\"");
+	   RESULT = new ConstantList(new Constant(new ConstantId(id),expr),c); :}
+	
+  /** UNKNOWN **/	
+	| error
+	
+	| /*epsilon*/;
+
+  /** Constant Value Assignment **/	
+constantprime ::= 
+	sign:s numeralid:n 
+		{: RESULT = new UnaryOpExpr(n,s); :}
+	| numeralid:n 
+		{: RESULT = n; :}
+	| STRING_LITERAL:s 
+		{: RESULT = new StringExpr(s); :}
+	;
+	
+
+/***** TYPES *****/
+types ::=
+	TYPE type_def:t {: RESULT=t; :}
+	|  /*epsilon*/;
+
+type_def ::=
+	type_def:l ID:i EQUAL type:t SEMICOLON 
+	{:	RESULT = new TypeDefList(new TypeDef(new IDNode(i),t),l); :}
+	| /*epsilon*/;
+	
+declarations ::=
+	VAR declaration_list:d
+	{:	RESULT = d; :}
+	| /*epsilon*/;
+	
+	
+declaration_list ::=
+    declaration_list:d identifier_list:l COLON type:t SEMICOLON 
+    {: RESULT = new SimpleDeclerationList(new SimpleDecleration(l,t),d);	:}
+    | /*epsilon*/ ;
+     
+    
+type ::=
+    standard_type_with_id:i {: RESULT = i; :}
+    | array:a {: RESULT = a; :}
+    | RECORD declaration_list:r END
+    {: RESULT = new RecordType(new RecordList(r)); :} ;
+
+standard_type_with_id ::=
+	ID:i	{: RESULT = new IDNode(i); :}
+	| standard_type:s {:	RESULT=s;	:};
+    
+standard_type ::=
+    INTEGER:i	{: RESULT = new IntType(); :}
+    | REAL:r	{: RESULT = new RealType(); :}
+    | CHAR:c		{: RESULT = new CharType(); :};
+
+    
+subprogram_declarations ::=
+    subprogram_declarations:l subprogram_declaration:s SEMICOLON
+    {:	RESULT = new SubProgramDeclerationList(s,l);	:}
+    | /*epsilon*/ ;     
+    
+subprogram_declaration ::=
+    subprogram_head:h
+    declarations:d
+    subprogram_declarations:sd
+    compound_statement:s
+    {:		RESULT =new SubProgramDecleration(h,d,sd,s);	:}
+    | FUNCTION ID:i arguments:a COLON standard_type_with_id:s SEMICOLON FORWARD  
+ 		{:		RESULT =new SubProgramDecleration(new SubProgramHeader(new FuncVar(i),a,s));	:}
+    | PROCEDURE ID:i arguments:a SEMICOLON FORWARD 
+  		{:		RESULT =new SubProgramDecleration(new SubProgramHeader(new FuncVar(i),a));	:}
+  ;    
+ 
+    
+subprogram_head  ::=
+    FUNCTION ID:i arguments:a COLON standard_type_with_id:s SEMICOLON 
+    	 {:		RESULT =new SubProgramHeader(new FuncVar(i),a,s); :}
+    | FUNCTION ID:i SEMICOLON
+  		 {:		RESULT =new SubProgramHeader(new FuncVar(i)); :}
+     | PROCEDURE ID:i arguments:a SEMICOLON
+  		 {:		RESULT =new SubProgramHeader(new FuncVar(i),a); :}
+     | PROCEDURE ID:i SEMICOLON
+  		 {:		RESULT =new SubProgramHeader(new FuncVar(i)); :}
+      ;
+
+arguments ::=
+    LPAREN parameter_list:p RPAREN
+    {:	RESULT=p; :}
+    | LPAREN RPAREN
+    |  /*epsilon*/ ;   
+
+parameter_list ::=
+    identifier_list:i COLON type:t
+    	{:	RESULT =  new SimpleDeclerationList(new SimpleDecleration(i,t));	:}
+    | parameter_list:l SEMICOLON identifier_list:i COLON type:t
+	    {:	RESULT =  new SimpleDeclerationList(new SimpleDecleration(i,t),l);	:}
+    ;
+
+compound_statement ::=
+	BEGIN optional_statements:o END
+	    {:	RESULT =  new CompoundStmt(o);	:}
+	|
+	BEGIN VAR:v declaration_list:d optional_statements:o END
+	    {:	System.out.println("Warning ( Line "+v.getLine()+"): this variable decleration section is not implemented and will be ignored.");	RESULT =  new CompoundStmt(o,d);	:}
+	;
+
+optional_statements ::=
+    statement_list:s
+	    {:	RESULT =  s;	:}
+    | /*epsilon*/ ;  
+
+statement_list ::=
+    statement:s
+    	    {:	RESULT =  new StmtList(s);	:} 
+    | statement_list:l SEMICOLON statement:s
+    	    {:	RESULT =  new StmtList(s,l);	:}
+    ;
+
+statement ::=
+    variable:id ASSIGN expression:expr
+    {:	 RESULT = new AssignStmt(id,expr);	:}
+    | procedure_statement:p
+     {:	RESULT = p;	:}
+    | compound_statement:c
+      {:    RESULT = c;	:}
+    | WHILE expression:e DO statement:s
+	  {:    RESULT = new WhileStmt(e,new StmtList(s));	:}
+    | FOR ID:id ASSIGN numeralid:id1 forprime:f numeralid:id2 DO statement:stmt
+	  {:	RESULT = new ForStmt(new IDNode(id), id1, id2, new StmtList(stmt),f);	:}
+	| IF expression:e THEN statement:s
+	  {:	RESULT = new IfStmt(e,new StmtList(s));	:}
+	| IF expression:e THEN statement:s1 ELSE statement:s2
+	  {:	RESULT = new IfStmt(e,new StmtList(s1),new StmtList(s2));	:}
+	| subprogram_declaration:s
+		{:	RESULT = s;	:} 
+	;
+	
+forprime ::= 
+	DOWNTO
+	{:	RESULT = new Boolean(true); :}
+	| TO
+	{:	RESULT = new Boolean(false); :}
+	;
+
+variable ::=
+    ID:id 
+    {:	RESULT = new IDNode(id);:}
+    | ID:id LSPAREN expression:e RSPAREN 
+    {:	RESULT = new IndexedExpr(new IDNode(id),e);	:}
+    | ID:v1 variableprime:v2
+    {:  RESULT = new RecordExpr(new IDNode(v1),v2);	:}
+    | ID:id LSPAREN expression:e RSPAREN variableprime:v2
+    {: 	RESULT = new RecordExpr(new IndexedExpr(new IDNode(id),e),v2);	:}
+    ;
+        
+variableprime ::=
+	variableprime:v1 DOT variable:v2
+	{: RESULT = new RecordExpr(v1,v2);	:}
+	| DOT variable:v1
+	{: RESULT = v1;	:}
+	;     
+    
+procedure_statement ::=
+    ID:id 
+    {:	RESULT = new FuncVar(id);	:}
+    | ID:id LPAREN expression_list:e RPAREN
+     {:	RESULT = new FunctionCallExpr(id,e);	:} ;
+
+expression_list ::=
+    expression:e
+	{:	RESULT = new ExprList(e);	:}
+    | expression_list:l COMMA expression:e 
+    {:	RESULT = new ExprList(e,l);	:}
+    ;
+
+expression ::=
+    simple_expression:e
+   	{:	RESULT = e;	:}
+    | simple_expression:e1 RELOP:r simple_expression:e2
+    {:	RESULT = new BinaryOpExpr(e1,r,e2);	:}
+    | simple_expression:e1 EQUAL simple_expression:e2
+     {:	RESULT = new BinaryOpExpr(e1,Operator.EQ,e2);	:};
+    
+simple_expression ::=
+    term:t
+    	{:	RESULT = t;	:}
+    | simple_expression:e OR term:t
+    	{:	RESULT = new BinaryOpExpr(e,Operator.LOR,t);	:}
+    | simple_expression:e PLUS term:t
+    	{:	RESULT = new BinaryOpExpr(e,Operator.PLUS,t);	:}
+    | simple_expression:e MINUS term:t
+    	{:	RESULT = new BinaryOpExpr(e,Operator.MINUS,t);	:}
+    ;
+    
+term ::=
+    factor:f
+ 	   {:	RESULT = f;	:}
+    | term:t MULOP:o factor:f
+		{:	RESULT = new BinaryOpExpr(t,o,f);	:}    
+    | sign:s factor:f
+		{:  RESULT = new UnaryOpExpr(f,s); :}
+    ;
+
+factor ::=
+    ID:id
+    	{:	RESULT = new IDNode(id);	:}    
+    | ID:id LSPAREN expression:e RSPAREN
+    	{:	RESULT = new IndexedExpr(new IDNode(id),e);	:}    	
+    | ID:id LPAREN expression_list:e RPAREN
+      {:	RESULT = new FunctionCallExpr(id,e);	:}
+    | ID:v1 variableprime:v2
+      {:  RESULT = new RecordExpr(new IDNode(v1),v2);	:}
+    | ID:id LSPAREN expression:e RSPAREN variableprime:v2
+    {: 	RESULT = new RecordExpr(new IndexedExpr(new IDNode(id),e),v2);	:}
+ 
+    | num:n
+    	{:	RESULT = n;	:}
+    | STRING_LITERAL:s
+    	{:	RESULT = new StringExpr(s);	:}
+    | LPAREN expression:e RPAREN
+    	{:	RESULT = e;	:}
+    | NOT factor:f
+    	{:	RESULT = new UnaryOpExpr(f,Operator.NOT);	:}
+    ;
+ 
+num ::=
+	INT:i
+		{: RESULT = new IntegerExpr(i);	:}
+	| DECIMAL:d
+		{: RESULT = new RealExpr(d);	:}
+	;
+
+sign ::=
+    PLUS {:	RESULT = Operator.PLUS;	:}
+    | MINUS	{:	RESULT = Operator.MINUS; :}
+    ;
+    
+array ::=
+	    ARRAY LSPAREN numeralid:n1 DOT DOT numeralid:n2 RSPAREN OF type:t
+	    {:	RESULT = new ArrayType(n1, n2,t);	:}
+	    ;
+	    
+numeralid ::= 
+	num:n
+		{:	RESULT = n;	:}
+	| ID:id
+		{:	RESULT = new ConstantId(id);	:};

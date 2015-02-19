@@ -1,0 +1,123 @@
+
+Depth(0) Program[
+	HashTable [
+		 POLYGONS = Symbol[polygons] Type[ArrayType] depth[0] at line 21
+		 SWAP = Symbol[swap] Type[null] depth[0] at line 29
+		 WRITECHAR = Symbol[WRITECHAR] Type[NULL] depth[0] at line 0
+		 STRINGVAR = Symbol[StringVar] Type[STRING] depth[0] at line 0
+		 CHARTYPE = Symbol[CharType] Type[CHAR] depth[0] at line 0
+		 I = Symbol[I] Type[IntType] depth[0] at line 23
+		 POLYGON = Symbol[Polygon] Type[RecordType] depth[0] at line 16
+		 YES = Symbol[YES] Type[INT] depth[0] at line 3
+		 INT = Symbol[int] Type[IntType] depth[0] at line 19
+		 REALEXPR = Symbol[RealExpr] Type[REAL] depth[0] at line 0
+		 TEXT = Symbol[TEXT] Type[STRING] depth[0] at line 7
+		 TRUE = Symbol[TRUE] Type[IntegerExpr] depth[0] at line 0
+		 REALTYPE = Symbol[RealType] Type[REAL] depth[0] at line 0
+		 Y = Symbol[y] Type[IntType] depth[0] at line 22
+		 X = Symbol[x] Type[IntType] depth[0] at line 22
+		 THINGS = Symbol[things] Type[ArrayType] depth[0] at line 25
+		 RECORDTYPE = Symbol[RecordType] Type[RECORD] depth[0] at line 0
+		 START_NUM = Symbol[START_NUM] Type[INT] depth[0] at line 5
+		 BOO = Symbol[boo] Type[CharType] depth[0] at line 24
+		 END_NUM = Symbol[END_NUM] Type[INT] depth[0] at line 6
+		 CHAREXPR = Symbol[CharExpr] Type[CHAR] depth[0] at line 0
+		 NEGATIVE_PI = Symbol[NEGATIVE_PI] Type[REAL] depth[0] at line 4
+		 WRITEINT = Symbol[WRITEINT] Type[NULL] depth[0] at line 0
+		 INTEGEREXPR = Symbol[IntegerExpr] Type[INT] depth[0] at line 0
+		 GCD = Symbol[gcd] Type[int] depth[0] at line 27
+		 PI = Symbol[PI] Type[REAL] depth[0] at line 2
+		 INTTYPE = Symbol[IntType] Type[INT] depth[0] at line 0
+		 FALSE = Symbol[FALSE] Type[IntegerExpr] depth[0] at line 0
+		 WRITEREAL = Symbol[WRITEREAL] Type[NULL] depth[0] at line 0
+		 VERTIX = Symbol[VERTIX] Type[RecordType] depth[0] at line 10
+	]
+	RecordMap [
+	 POLYGON = 
+	Depth(1) Polygon[
+		HashTable [
+			 VERTICES = Symbol[vertices] Type[ArrayType] depth[1] at line 17
+		]
+		RecordMap [
+		]
+	] End Depth(1)
+	 VERTIX = 
+	Depth(1) VERTIX[
+		HashTable [
+			 Y = Symbol[Y] Type[RecordType] depth[1] at line 12
+			 DATA = Symbol[data] Type[ArrayType] depth[1] at line 11
+			 X = Symbol[X] Type[RecordType] depth[1] at line 12
+		]
+		RecordMap [
+		 Y = 
+		Depth(2) Y[
+			HashTable [
+				 VALUE = Symbol[VALUE] Type[RealType] depth[2] at line 13
+			]
+			RecordMap [
+			]
+		] End Depth(2)
+		 X = 
+		Depth(2) X[
+			HashTable [
+				 VALUE = Symbol[VALUE] Type[RealType] depth[2] at line 13
+			]
+			RecordMap [
+			]
+		] End Depth(2)
+		]
+	] End Depth(1)
+	]
+	Children [
+ 
+	Depth(1) gcd[
+		HashTable [
+			 A = Symbol[a] Type[IntType] depth[1] at line 27
+			 B = Symbol[b] Type[IntType] depth[1] at line 27
+		]
+		RecordMap [
+		]
+	] End Depth(1)
+
+	Depth(1) swap[
+		HashTable [
+			 TMP = Symbol[tmp] Type[IntType] depth[1] at line 31
+			 A = Symbol[a] Type[IntType] depth[1] at line 29
+			 B = Symbol[b] Type[IntType] depth[1] at line 29
+			 U = Symbol[u] Type[IntType] depth[1] at line 30
+			 T = Symbol[t] Type[IntType] depth[1] at line 30
+			 W = Symbol[w] Type[IntType] depth[1] at line 30
+			 V = Symbol[v] Type[IntType] depth[1] at line 30
+			 Q = Symbol[q] Type[IntType] depth[1] at line 30
+			 P = Symbol[p] Type[IntType] depth[1] at line 30
+			 S = Symbol[s] Type[IntType] depth[1] at line 30
+			 R = Symbol[r] Type[IntType] depth[1] at line 30
+			 Y = Symbol[y] Type[IntType] depth[1] at line 30
+			 FOO = Symbol[foo] Type[null] depth[1] at line 32
+			 X = Symbol[x] Type[IntType] depth[1] at line 30
+			 Z = Symbol[z] Type[IntType] depth[1] at line 30
+		]
+		RecordMap [
+		]
+		Children [
+ 
+		Depth(2) foo[
+			HashTable [
+			]
+			RecordMap [
+			]
+		] End Depth(2)
+		] End Children
+	] End Depth(1)
+
+	Depth(1) gcd[
+		HashTable [
+			 A = Symbol[a] Type[IntType] depth[1] at line 27
+			 B = Symbol[b] Type[IntType] depth[1] at line 27
+		]
+		RecordMap [
+		]
+	] End Depth(1)
+	] End Children
+] End Depth(0)
+
